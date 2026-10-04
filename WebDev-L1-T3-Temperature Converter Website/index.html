@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Temperature Converter</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<div class="container">
+
+    <div class="converter-card">
+
+        <h1>Temperature Converter</h1>
+
+        <p class="subtitle">
+            Convert Celsius, Fahrenheit and Kelvin
+        </p>
+
+
+        <div class="form-group">
+
+            <label for="temperature">
+                Enter Temperature
+            </label>
+
+            <input
+                type="number"
+                id="temperature"
+                placeholder="Enter temperature"
+                step="any"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="unit">
+                Select Unit
+            </label>
+
+            <select id="unit">
+
+                <option value="celsius">
+                    Celsius
+                </option>
+
+                <option value="fahrenheit">
+                    Fahrenheit
+                </option>
+
+                <option value="kelvin">
+                    Kelvin
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button onclick="convertTemperature()">
+            Convert
+        </button>
+
+
+        <p id="errorMessage"></p>
+
+
+        <div class="results">
+
+            <h2>Conversion Results</h2>
+
+
+            <div class="result-box">
+
+                <span>Celsius</span>
+
+                <strong id="celsiusResult">
+                    --
+                </strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Fahrenheit</span>
+
+                <strong id="fahrenheitResult">
+                    --
+                </strong>
+
+            </div>
+
+
+            <div class="result-box">
+
+                <span>Kelvin</span>
+
+                <strong id="kelvinResult">
+                    --
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <p class="note">
+            Temperature cannot be below absolute zero.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function convertTemperature() {
+
+        var temperature =
+            parseFloat(
+                document.getElementById("temperature").value
+            );
+
+
+        var unit =
+            document.getElementById("unit").value;
+
+
+        var error =
+            document.getElementById("errorMessage");
+
+
+        var celsius =
+            document.getElementById("celsiusResult");
+
+
+        var fahrenheit =
+            document.getElementById("fahrenheitResult");
+
+
+        var kelvin =
+            document.getElementById("kelvinResult");
+
+
+        error.textContent = "";
+
+
+        if (isNaN(temperature)) {
+
+            error.textContent =
+                "Please enter a temperature.";
+
+            return;
+        }
+
+
+        var c;
+
+
+        if (unit === "celsius") {
+
+            c = temperature;
+
+        }
+
+
+        else if (unit === "fahrenheit") {
+
+            c = (temperature - 32) * 5 / 9;
+
+        }
+
+
+        else if (unit === "kelvin") {
+
+            c = temperature - 273.15;
+
+        }
+
+
+        if (c < -273.15) {
+
+            error.textContent =
+                "Temperature cannot be below absolute zero.";
+
+            return;
+        }
+
+
+        var f =
+            (c * 9 / 5) + 32;
+
+
+        var k =
+            c + 273.15;
+
+
+        celsius.textContent =
+            c.toFixed(2) + " C";
+
+
+        fahrenheit.textContent =
+            f.toFixed(2) + " F";
+
+
+        kelvin.textContent =
+            k.toFixed(2) + " K";
+
+    }
+
+</script>
+```
+
+</body>
+
+</html>
